@@ -13,16 +13,7 @@
     "testling": "^1.7.1"
   },
   "testling": {
-    "html": "test/index.html",
-    "browsers": [
-      "ie/10..latest",
-      "chrome/latest",
-      "firefox/latest",
-      "safari/latest",
-      "opera/latest",
-      "iphone/latest",
-      "android-browser/latest"
-    ]
+    "html": "test/index.html"
   },
   "scripts": {
     "test": "testling -x open",
