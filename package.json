@@ -9,10 +9,23 @@
   "devDependencies": {
     "browserify": "^10.1.0",
     "chai": "^2.3.0",
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "testling": "^1.7.1"
+  },
+  "testling": {
+    "html": "test/index.html",
+    "browsers": [
+      "ie/10..latest",
+      "chrome/latest",
+      "firefox/latest",
+      "safari/latest",
+      "opera/latest",
+      "iphone/latest",
+      "android-browser/latest"
+    ]
   },
   "scripts": {
-    "test": "mocha test",
+    "test": "testling -x open",
     "dist": "browserify index.js -s virtualize > bundle.js"
   },
   "repository": {
