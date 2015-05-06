@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link href="vendors/mocha.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="vendors/mocha.js" type="text/javascript"></script>
+  <script src="vendors/chai.js" type="text/javascript"></script>
+  <script src="../bundle.js" type="text/javascript"></script>
+  <script>mocha.setup('bdd');</script>
+  <script src="index.js" type="text/javascript"></script>
+  <script>
+    mocha.checkLeaks();
+    mocha.run();
+  </script>
+</body>
+</html>

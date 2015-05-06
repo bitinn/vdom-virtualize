@@ -1,4 +1,4 @@
-!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.vdomVirtualize=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.virtualize = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*!
 * vdom-virtualize
 * Copyright 2014 by Marcel Klehr <mklehr@gmx.net>
@@ -22,8 +22,8 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-var VNode = _dereq_("virtual-dom/vnode/vnode")
-  , VText = _dereq_("virtual-dom/vnode/vtext")
+var VNode = require("virtual-dom/vnode/vnode")
+  , VText = require("virtual-dom/vnode/vtext")
 
 module.exports = createVNode
 
@@ -259,14 +259,14 @@ module.exports.attrs = [
 ,"y"
 ]
 
-},{"virtual-dom/vnode/vnode":7,"virtual-dom/vnode/vtext":8}],2:[function(_dereq_,module,exports){
+},{"virtual-dom/vnode/vnode":7,"virtual-dom/vnode/vtext":8}],2:[function(require,module,exports){
 module.exports = isThunk
 
 function isThunk(t) {
     return t && t.type === "Thunk"
 }
 
-},{}],3:[function(_dereq_,module,exports){
+},{}],3:[function(require,module,exports){
 module.exports = isHook
 
 function isHook(hook) {
@@ -275,8 +275,8 @@ function isHook(hook) {
        typeof hook.unhook === "function" && !hook.hasOwnProperty("unhook"))
 }
 
-},{}],4:[function(_dereq_,module,exports){
-var version = _dereq_("./version")
+},{}],4:[function(require,module,exports){
+var version = require("./version")
 
 module.exports = isVirtualNode
 
@@ -284,22 +284,22 @@ function isVirtualNode(x) {
     return x && x.type === "VirtualNode" && x.version === version
 }
 
-},{"./version":6}],5:[function(_dereq_,module,exports){
+},{"./version":6}],5:[function(require,module,exports){
 module.exports = isWidget
 
 function isWidget(w) {
     return w && w.type === "Widget"
 }
 
-},{}],6:[function(_dereq_,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = "2"
 
-},{}],7:[function(_dereq_,module,exports){
-var version = _dereq_("./version")
-var isVNode = _dereq_("./is-vnode")
-var isWidget = _dereq_("./is-widget")
-var isThunk = _dereq_("./is-thunk")
-var isVHook = _dereq_("./is-vhook")
+},{}],7:[function(require,module,exports){
+var version = require("./version")
+var isVNode = require("./is-vnode")
+var isWidget = require("./is-widget")
+var isThunk = require("./is-thunk")
+var isVHook = require("./is-vhook")
 
 module.exports = VirtualNode
 
@@ -368,8 +368,8 @@ function VirtualNode(tagName, properties, children, key, namespace) {
 VirtualNode.prototype.version = version
 VirtualNode.prototype.type = "VirtualNode"
 
-},{"./is-thunk":2,"./is-vhook":3,"./is-vnode":4,"./is-widget":5,"./version":6}],8:[function(_dereq_,module,exports){
-var version = _dereq_("./version")
+},{"./is-thunk":2,"./is-vhook":3,"./is-vnode":4,"./is-widget":5,"./version":6}],8:[function(require,module,exports){
+var version = require("./version")
 
 module.exports = VirtualText
 
@@ -380,6 +380,5 @@ function VirtualText(text) {
 VirtualText.prototype.version = version
 VirtualText.prototype.type = "VirtualText"
 
-},{"./version":6}]},{},[1])
-(1)
+},{"./version":6}]},{},[1])(1)
 });
