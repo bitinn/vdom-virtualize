@@ -7,10 +7,11 @@
     "virtual-dom": "2.0.1"
   },
   "devDependencies": {
-    "virtual-dom": "2.0.1"
+    "chai": "^2.3.0",
+    "mocha": "^2.2.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
