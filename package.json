@@ -7,10 +7,17 @@
     "virtual-dom": "2.0.1"
   },
   "devDependencies": {
-    "virtual-dom": "2.0.1"
+    "browserify": "^10.1.0",
+    "chai": "^2.3.0",
+    "mocha": "^2.2.4",
+    "testling": "^1.7.1"
+  },
+  "testling": {
+    "html": "test/index.html"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "testling -x open",
+    "dist": "browserify index.js -s virtualize > bundle.js"
   },
   "repository": {
     "type": "git",
