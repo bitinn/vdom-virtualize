@@ -10,13 +10,11 @@
     "browserify": "^10.1.0",
     "chai": "^2.3.0",
     "mocha": "^2.2.4",
-    "testling": "^1.7.1"
-  },
-  "testling": {
-    "html": "test/index.html"
+    "mocha-phantomjs": "^3.5.3",
+    "phantomjs": "^1.9.17"
   },
   "scripts": {
-    "test": "testling -x open",
+    "test": "mocha-phantomjs test/index.html",
     "dist": "browserify index.js -s virtualize > bundle.js"
   },
   "repository": {
