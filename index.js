@@ -29,8 +29,10 @@ module.exports = createVNode
 function createVNode(domNode, key) {
   key = key || null // XXX: Leave out `key` for now... merely used for (re-)ordering
 
+  if(domNode === null) return new VText('')
   if(domNode.nodeType == 1) return createFromElement(domNode, key)
   if(domNode.nodeType == 3) return createFromTextNode(domNode, key)
+  if(domNode.nodeType == 8) return new VText('')
   return
 }
 
@@ -110,14 +112,15 @@ function getElementProperties(el) {
     //
     // .dataset properties are directly accessible as transparent getters/setters, so
     // patching with vdom is possible.
-    /*if("dataset" == propName) {
-      var data = {}
+    if("dataset" == propName) {
+      var data = {};
       for(var p in el.dataset) {
-        data[p] = el.dataset[p]
+        var param = p.match(/([A-Z]?[^A-Z]*)/g).slice(0, -1).map(function(p) {
+          return p.toLowerCase();
+        }).join('-');
+        obj['data-' + param] = el.dataset[p];
       }
-      obj[propName] = data
-      return
-    }*/
+    }
 
     // Special case: attributes
     // these are a NamedNodeMap, but we can just convert them to a hash for vdom,

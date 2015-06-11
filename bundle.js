@@ -30,16 +30,17 @@ module.exports = createVNode
 function createVNode(domNode, key) {
   key = key || null // XXX: Leave out `key` for now... merely used for (re-)ordering
 
+  if(domNode === null) return new VText('')
   if(domNode.nodeType == 1) return createFromElement(domNode, key)
   if(domNode.nodeType == 3) return createFromTextNode(domNode, key)
+  if(domNode.nodeType == 8) return new VText('')
   return
 }
 
 createVNode.fromHTML = function(html, key) {
   var domNode = document.createElement('div'); // create container
   domNode.innerHTML = html; // browser parses HTML into DOM tree
-  domNode = domNode.children[0] || domNode; // select first node in tree
-  return createVNode(domNode, key);
+  return createVNode(domNode.firstChild, key);
 };
 
 function createFromTextNode(tNode) {
@@ -78,13 +79,28 @@ function getElementProperties(el) {
     if("style" == propName) {
       var css = {}
         , styleProp
-      for(var i=0; i<el.style.length; i++) {
-        styleProp = el.style[i]
-        css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
+      if (el.style.length) {
+        for(var i=0; i<el.style.length; i++) {
+          styleProp = el.style[i]
+          css[styleProp] = el.style.getPropertyValue(styleProp) // XXX: add support for "!important" via getPropertyPriority()!
+        }
+      } else { // IE8
+        for (var styleProp in el.style) {
+          if (el.style[styleProp]) {
+            css[styleProp] = el.style[styleProp];
+          }
+        }
       }
 
       obj[propName] = css
       return
+    }
+
+    // https://msdn.microsoft.com/en-us/library/cc848861%28v=vs.85%29.aspx
+    // The img element does not support the HREF content attribute.
+    // In addition, the href property is read-only for the img Document Object Model (DOM) object
+    if (el.tagName.toLowerCase() === 'img' && propName === 'href') {
+      return;
     }
 
     // Special case: dataset
@@ -97,14 +113,15 @@ function getElementProperties(el) {
     //
     // .dataset properties are directly accessible as transparent getters/setters, so
     // patching with vdom is possible.
-    /*if("dataset" == propName) {
-      var data = {}
+    if("dataset" == propName) {
+      var data = {};
       for(var p in el.dataset) {
-        data[p] = el.dataset[p]
+        var param = p.match(/([A-Z]?[^A-Z]*)/g).slice(0, -1).map(function(p) {
+          return p.toLowerCase();
+        }).join('-');
+        obj['data-' + param] = el.dataset[p];
       }
-      obj[propName] = data
-      return
-    }*/
+    }
 
     // Special case: attributes
     // these are a NamedNodeMap, but we can just convert them to a hash for vdom,

@@ -1,13 +1,8 @@
 var should = chai.should();
 var convertHTML = virtualize.fromHTML;
 
-describe('htmlparser-to-vdom', function () {
+describe('vdom-virtualize', function () {
 
-  /*
-   * TODO: decide whether we support these scenarios, as innerHTML support them
-   * Also virtualize currently wrap text node within a div vnode
-   */
-  /*
   describe('when converting a single text node', function () {
     it('parses the text node correctly', function () {
       var html = 'test';
@@ -17,6 +12,7 @@ describe('htmlparser-to-vdom', function () {
     });
   });
 
+  /*
   describe('when converting multiple sibling nodes without a wrapper', function () {
     it('throws', function () {
       var html = '    <div></div>';
@@ -145,9 +141,8 @@ describe('htmlparser-to-vdom', function () {
       should.exist(converted.properties.dataset.test);
       converted.properties.dataset.test.should.eql('foobar');
 
-      // TODO: properties are not set
-      //should.exist(converted.properties['data-test']);
-      //converted.properties['data-test'].should.eql('foobar');
+      should.exist(converted.properties['data-test']);
+      converted.properties['data-test'].should.eql('foobar');
     });
 
     it('converts a single hyphenated data attribute correctly', function () {
@@ -159,9 +154,8 @@ describe('htmlparser-to-vdom', function () {
       should.exist(converted.properties.dataset.testData);
       converted.properties.dataset.testData.should.eql('foobar');
 
-      // TODO: properties are not set
-      //should.exist(converted.properties['data-test-data']);
-      //converted.properties['data-test-data'].should.eql('foobar');
+      should.exist(converted.properties['data-test-data']);
+      converted.properties['data-test-data'].should.eql('foobar');
     });
 
      it('converts multiple data attributes correctly', function () {
@@ -176,12 +170,11 @@ describe('htmlparser-to-vdom', function () {
       should.exist(converted.properties.dataset.foobar);
       converted.properties.dataset.foobar.should.eql('test');
 
-      // TODO: properties are not set
-      //should.exist(converted.properties['data-test']);
-      //converted.properties['data-test'].should.eql('foobar');
+      should.exist(converted.properties['data-test']);
+      converted.properties['data-test'].should.eql('foobar');
 
-      //should.exist(converted.properties['data-foobar']);
-      //converted.properties['data-foobar'].should.eql('test');
+      should.exist(converted.properties['data-foobar']);
+      converted.properties['data-foobar'].should.eql('test');
     });
   });
 
@@ -342,8 +335,7 @@ describe('htmlparser-to-vdom', function () {
             brackets or the greater-than sign).\
             ]]>';
       var converted = convertHTML(html);
-      // TODO: innerHTML will return empty but virtualize currently wrap text node
-      //converted.text.should.eql('');
+      converted.text.should.eql('');
     });
   });
 
@@ -351,8 +343,7 @@ describe('htmlparser-to-vdom', function () {
     it('returns an empty string instead (directives are unsupported)', function () {
       var html = '<!DOCTYPE html>';
       var converted = convertHTML(html);
-      // TODO: innerHTML will return empty but virtualize currently wrap text node
-      //converted.text.should.eql('');
+      converted.text.should.eql('');
     });
   });
 
@@ -361,8 +352,7 @@ describe('htmlparser-to-vdom', function () {
       var html = '<div><!-- some comment --></div>';
       var converted = convertHTML(html);
       var comment = converted.children[0];
-      // TODO: innerHTML will return empty but virtualize currently wrap text node
-      //comment.text.should.eql('');
+      comment.text.should.eql('');
     });
   });
 });
